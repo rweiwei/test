@@ -8,104 +8,70 @@
 <meta name="theme-color" content="#1a1a2e">
 <title>日本行 2026</title>
 <style>
-:root{--bg:#0f0f1a;--card:#1a1a2e;--surface:#16213e;--primary:#e94560;--accent:#0f3460;--text:#eaeaea;--text2:#8899aa;--border:#2a2a4a;--success:#4ade80;--warning:#fbbf24;--orange:#f97316;--purple:#a78bfa}
+:root{--bg:#0f0f1a;--card:#1a1a2e;--surface:#16213e;--primary:#e94560;--accent:#0f3460;--text:#eaeaea;--text2:#8899aa;--border:#2a2a4a;--success:#4ade80;--warning:#fbbf24}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:100px}
-header{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);padding:48px 20px 20px;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.4)}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:80px}
+header{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);padding:48px 20px 24px;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.4)}
 header h1{font-size:24px;font-weight:800;letter-spacing:1px}
 header h1 span{color:var(--primary)}
 header p{font-size:13px;color:var(--text2);margin-top:4px}
-.progress{height:3px;background:var(--border);border-radius:2px;margin:10px 16px 0;overflow:hidden}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--success));border-radius:2px;transition:width .3s;width:0}
-
-/* Tabs */
-.tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:92px;z-index:99}
-.tabs button{flex:1;padding:10px 8px;border:none;background:transparent;color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;position:relative;white-space:nowrap}
+.progress-bar{height:3px;background:var(--border);border-radius:2px;margin:12px 16px 0;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--success));border-radius:2px;transition:width .3s ease;width:0}
+.tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:100px;z-index:99;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tabs button{flex:1;padding:12px;border:none;background:transparent;color:var(--text2);font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;position:relative;white-space:nowrap}
 .tabs button.active{color:var(--primary)}
-.tabs button.active::after{content:'';position:absolute;bottom:0;left:15%;right:15%;height:3px;background:var(--primary);border-radius:3px 3px 0 0}
-.tab-content{display:none;padding:10px}
+.tabs button.active::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:3px;background:var(--primary);border-radius:3px 3px 0 0}
+.tab-content{display:none;padding:12px}
 .tab-content.active{display:block}
-
-/* Day Card */
-.day-card{background:var(--card);border-radius:14px;margin-bottom:10px;overflow:hidden;border:1px solid var(--border)}
-.day-header{display:flex;align-items:center;padding:12px 14px;cursor:pointer;gap:10px;user-select:none;-webkit-tap-highlight-color:transparent}
-.day-num{background:var(--primary);color:#fff;width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;flex-shrink:0}
+.day-card{background:var(--card);border-radius:16px;margin-bottom:12px;overflow:hidden;border:1px solid var(--border);transition:all .2s}
+.day-card:active{transform:scale(.98)}
+.day-header{display:flex;align-items:center;padding:14px 16px;cursor:pointer;gap:12px;user-select:none;-webkit-tap-highlight-color:transparent}
+.day-num{background:var(--primary);color:#fff;width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0}
 .day-meta{flex:1;min-width:0}
-.day-meta h2{font-size:14px;font-weight:700}
-.day-meta .sub{font-size:11px;color:var(--text2)}
-.day-icon{font-size:24px;flex-shrink:0}
-.arrow{color:var(--text2);font-size:16px;transition:transform .3s;flex-shrink:0}
+.day-meta h2{font-size:15px;font-weight:700}
+.day-meta .sub{font-size:12px;color:var(--text2)}
+.day-icon{font-size:28px;flex-shrink:0}
+.arrow{color:var(--text2);font-size:18px;transition:transform .3s;flex-shrink:0}
 .arrow.open{transform:rotate(180deg)}
-
-/* Route badge on collapsed card */
-.route-badge{font-size:11px;background:var(--surface);padding:4px 8px;border-radius:8px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;flex-shrink:0}
-.route-badge .line{color:var(--success);font-weight:600}
-.route-badge .time{color:var(--orange)}
-
-.day-body{display:none;padding:0 14px 14px}
+.day-body{display:none;padding:0 16px 16px}
 .day-body.open{display:block}
-
-.slot{border-left:3px solid var(--primary);padding-left:10px;margin:10px 0}
-.slot.evening{border-left-color:var(--purple)}
-.slot h3{font-size:13px;font-weight:600;margin-bottom:3px;display:flex;align-items:center;gap:5px}
-.slot p{font-size:12px;color:var(--text2);margin:2px 0}
-
-/* Transport section inside day card - prominent */
-.day-transport{background:linear-gradient(135deg,#0d2818 0%,#16213e 100%);border:1px solid #1a4a2e;border-radius:10px;padding:12px;margin:10px 0}
-.day-transport .title{font-size:12px;color:var(--success);font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:5px}
-.trans-row{display:flex;align-items:center;gap:8px;padding:3px 0;font-size:12px;color:var(--text)}
-.trans-row .dot{width:8px;height:8px;border-radius:50%;background:var(--success);flex-shrink:0}
-.trans-row .dot.end{background:var(--primary)}
-.trans-row .station{font-weight:600}
-.trans-row .info{color:var(--text2);font-size:11px;margin-left:auto}
-
-/* Food */
-.food-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.food-item{background:var(--surface);border-radius:8px;padding:8px 10px;text-align:center;font-size:12px}
-.food-item a{color:var(--primary);text-decoration:none;font-weight:600;display:block;margin-bottom:3px}
+.slot{border-left:3px solid var(--primary);padding-left:12px;margin:12px 0}
+.slot.later{border-left-color:var(--warning)}
+.slot.evening{border-left-color:var(--accent)}
+.slot.flex{border-left-color:var(--success)}
+.slot h3{font-size:14px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.slot p{font-size:13px;color:var(--text2);margin:2px 0}
+.food-item{background:var(--surface);border-radius:10px;padding:10px 12px;margin:6px 0;display:flex;align-items:center;gap:10px;font-size:13px}
+.food-item a{color:var(--primary);text-decoration:none;font-weight:600;white-space:nowrap}
 .food-item a:hover{text-decoration:underline}
-.food-item .price{color:var(--success);font-weight:600;font-size:11px}
-.food-item .tag{background:var(--accent);color:var(--text);padding:1px 6px;border-radius:5px;font-size:10px;display:inline-block;margin-top:3px}
-
-/* Transport Tab - redesigned */
-.transport-tab-header{padding:4px 0 14px}
-.base-selector{display:flex;gap:8px;margin-bottom:12px}
-.base-btn{flex:1;padding:10px;border-radius:10px;border:2px solid var(--border);background:transparent;color:var(--text2);font-weight:600;font-size:13px;cursor:pointer;transition:all .2s;text-align:center}
-.base-btn.active{border-color:var(--success);color:var(--success);background:rgba(74,222,128,.1)}
-.base-btn.inactive{border-color:var(--primary);color:var(--primary);background:rgba(233,69,96,.1)}
-
-.route-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.route-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;position:relative;overflow:hidden}
-.route-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--success);border-radius:0 4px 4px 0}
-.route-card .dest{font-size:14px;font-weight:700;margin-bottom:2px}
-.route-card .dest small{font-size:11px;color:var(--text2);font-weight:400}
-.route-card .line-info{font-size:12px;color:var(--text2);margin:2px 0}
-.route-card .time-big{font-size:20px;font-weight:800;color:var(--success);margin-top:4px}
-.route-card .time-big small{font-size:11px;color:var(--text2);font-weight:400}
-
-.long-route-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-top:8px}
-.long-route-card h3{font-size:13px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:5px}
-.long-route-card .step{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:12px}
-.long-route-card .step .arrow-icon{color:var(--text2)}
-
-/* FAB */
-.fab{position:fixed;bottom:100px;right:16px;width:52px;height:52px;border-radius:50%;background:var(--primary);color:#fff;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 16px rgba(233,69,96,.4);z-index:200;display:flex;align-items:center;justify-content:center;transition:transform .2s}
-.fab:active{transform:scale(.9)}
-
-/* Transport Overlay */
-.overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);z-index:300;animation:fadeIn .2s}
-.overlay.open{display:block}
-.overlay-content{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-radius:20px 20px 0 0;padding:20px;max-height:80vh;overflow-y:auto;animation:slideUp .3s}
-.overlay-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
-.overlay-header h2{font-size:16px}
-.overlay-close{background:none;border:none;color:var(--text2);font-size:24px;cursor:pointer;padding:4px}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-
-footer{padding:16px;text-align:center;color:var(--text2);font-size:11px}
-
-@media(max-width:480px){.route-grid{grid-template-columns:1fr}.food-grid{grid-template-columns:1fr}}
+.food-item .price{color:var(--success);font-weight:600;font-size:12px}
+.food-item .tag{background:var(--accent);color:var(--text);padding:2px 8px;border-radius:6px;font-size:11px;white-space:nowrap}
+.transport{background:var(--surface);border-radius:10px;padding:10px 12px;margin:6px 0;font-size:13px;color:var(--text2);display:flex;align-items:center;gap:8px}
+.transport .icon{font-size:16px}
+.note{background:rgba(233,69,96,.1);border:1px solid rgba(233,69,96,.3);border-radius:10px;padding:10px 12px;margin:6px 0;font-size:13px;display:flex;align-items:flex-start;gap:8px}
+.food-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.food-grid .food-item{flex-direction:column;text-align:center;gap:4px}
+.food-grid .food-item a{white-space:normal}
+.transport-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin:8px 0}
+.transport-card h3{font-size:14px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.transport-card .row{display:flex;justify-content:space-between;padding:4px 0;font-size:13px;border-bottom:1px solid var(--border)}
+.transport-card .row:last-child{border-bottom:none}
+.transport-card .row span{color:var(--text2)}
+.transport-card .row strong{color:var(--text)}
+.timeline{position:relative;padding-left:20px}
+.timeline::before{content:'';position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:var(--border)}
+.timeline-item{position:relative;padding:6px 0 6px 16px;font-size:13px}
+.timeline-item::before{content:'';position:absolute;left:-2px;top:10px;width:10px;height:10px;border-radius:50%;background:var(--primary);border:2px solid var(--bg)}
+.timeline-item.alt::before{background:var(--warning)}
+.timeline-item h4{font-weight:600;font-size:14px}
+.timeline-item p{color:var(--text2)}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.summary-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+.summary-item .num{font-size:28px;font-weight:800;color:var(--primary)}
+.summary-item .label{font-size:12px;color:var(--text2);margin-top:2px}
+footer{padding:20px;text-align:center;color:var(--text2);font-size:12px}
+@media(max-width:480px){.food-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -113,311 +79,319 @@ footer{padding:16px;text-align:center;color:var(--text2);font-size:11px}
 <header>
 <h1>🗾 <span>日本行</span> 2026</h1>
 <p>7/13㊊ — 7/24㊎ ・ 12 天東京之旅</p>
-<div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
 </header>
 
-<div class="tabs">
+<div class="tabs" id="tabs">
 <button class="active" data-tab="itinerary">📅 行程</button>
 <button data-tab="food">🍜 美食</button>
 <button data-tab="transport">🚃 交通</button>
 </div>
 
-<div class="tab-content active" id="tab-itinerary"><div id="daysContainer"></div></div>
-<div class="tab-content" id="tab-food"><div id="foodContainer"></div></div>
-<div class="tab-content" id="tab-transport"><div id="transportContainer"></div></div>
-
-<button class="fab" id="fabBtn" onclick="openOverlay()">🚃</button>
-
-<div class="overlay" id="overlay" onclick="if(event.target===this)closeOverlay()">
-<div class="overlay-content">
-<div class="overlay-header">
-<h2>🚃 交通速查</h2>
-<button class="overlay-close" onclick="closeOverlay()">✕</button>
-</div>
-<div id="overlayRoutes"></div>
-</div>
+<div class="tab-content active" id="tab-itinerary">
+<div id="daysContainer"></div>
 </div>
 
-<footer>點地標自動開啟 Google Maps ・ 🚃 按鈕隨時查交通</footer>
+<div class="tab-content" id="tab-food">
+<div id="foodContainer"></div>
+</div>
+
+<div class="tab-content" id="tab-transport">
+<div id="transportContainer"></div>
+</div>
+
+<footer>Made with ❤️ ・ 點地標可開 Google Maps</footer>
 
 <script>
-const baseNerima = [
-  {to:"池袋", line:"山手線", time:"3分"},
-  {to:"秋葉原", line:"山手線", time:"10分"},
-  {to:"澀谷", line:"山手線", time:"15分"},
-  {to:"新宿", line:"山手線", time:"9分"},
-  {to:"東京ドーム", line:"三田線直通", time:"6分"},
-  {to:"銀座", line:"三田線直通", time:"14分"},
-  {to:"上野", line:"山手線", time:"8分"},
-  {to:"築地", line:"山手線→日比谷線", time:"25分"},
-  {to:"成田", line:"山手線→日暮里→Skyliner", time:"55分"}
-];
-const baseOtsuka = [
-  {to:"池袋", line:"山手線", time:"3分"},
-  {to:"秋葉原", line:"山手線", time:"8分"},
-  {to:"新宿", line:"山手線", time:"7分"}
-];
+const data = {
+  days: [
+    {
+      day:1, date:"7/13", week:"㊊", title:"抵達日", icon:"✈️",
+      slots:[
+        {type:"main", label:"🌅 上午", items:["成田空港 → 🚄Skyliner → 日暮里 → 🚃山手線 → 大塚"]},
+        {type:"main", label:"🌆 傍晚", items:["池袋（輕逛＋晚餐）","Grandscape 池袋 13F Bar Panorama（室内花火・夜景無料）"]},
+        {type:"evening", label:"🌙 晚上", items:["早點休息（紅眼班機）"]}
+      ],
+      foods:[
+        {name:"無敵家拉麵", url:"https://www.google.com/maps/search/無敵家+池袋", price:"~¥1,000", tag:"必吃"},
+        {name:"魚金 池袋東口店", url:"https://www.google.com/maps/search/魚金+池袋", price:"~¥3,000", tag:"海鮮"},
+        {name:"開樂 巨大煎餃", url:"https://www.google.com/maps/search/開樂+池袋", price:"¥333/3個", tag:"週一定休"},
+        {name:"ねぎし 池袋東口店", url:"https://www.google.com/maps/search/ねぎし+池袋東口", price:"~¥1,500", tag:"牛舌定食"},
+        {name:"Gyukatsu Motomura", url:"https://www.google.com/maps/search/牛かつもと村+池袋", price:"~¥1,300", tag:"炸牛排"}
+      ],
+      transport:"✈️ 成田 → Skyliner 40分 → 日暮里 → 山手線 5分 → 大塚"
+    },
+    {
+      day:2, date:"7/14", week:"㊋", title:"池袋＋御靈祭🔥", icon:"🎮",
+      slots:[
+        {type:"main", label:"🎮 整天", items:["池袋：Sunshine City、Animate、Pokémon Center"]},
+        {type:"evening", label:"🌙 晚上加碼", items:["🏮 御靈祭 Mitama Matsuri @靖國神社","✨ 青森ねぶた＋阿波踊り＋30,000燈籠"]}
+      ],
+      foods:[
+        {name:"竈門ご飯 一穀", url:"https://www.google.com/maps/search/竈門ご飯+一穀+池袋+サンシャインシティ", price:"~¥1,500", tag:"2026新開"},
+        {name:"敘敘苑 池袋", url:"https://www.google.com/maps/search/叙々苑+池袋+サンシャイン", price:"~¥4,000", tag:"高級燒肉"},
+        {name:"開樂 巨大煎餃", url:"https://www.google.com/maps/search/開樂+池袋", price:"¥333/3個", tag:"週一定休"},
+        {name:"靖國神社屋台", url:"https://www.google.com/maps/search/靖國神社", price:"各~¥500", tag:"祭典"}
+      ],
+      transport:"🚃 池袋 → 有樂町線 10分 → 九段下"
+    },
+    {
+      day:3, date:"7/15", week:"㊋", title:"秋葉原＋東京一番街", icon:"🤖",
+      slots:[
+        {type:"main", label:"🤖 上午", items:["秋葉原：神田神社、神秘販賣機、鯉魚王鯛魚燒","🐮 Milk Shop Luck 酪（JR月台・乳製品）"]},
+        {type:"main", label:"🏙️ 下午 東京一番街", items:[
+          "🚃 秋葉原 → 京浜東北線 2分 → 東京駅",
+          "🔔 八重洲口方面 → B1F 八重洲地下中央口改札（銀の鈴が目印）",
+          "🚶 改札出たらすぐ！左手＝キャラクターストリート",
+          "🎯 東京キャラクターストリート（Pokémon・Snoopy等）",
+          "🍜 東京ラーメンストリート（六厘舍・斑鳩等10店）",
+          "🍪 東京おかしランド"
+        ]}
+      ],
+      foods:[
+        {name:"九州じゃんがら 秋葉原本店", url:"https://www.google.com/maps/search/九州じゃんがら+秋葉原", price:"~¥1,000", tag:"人氣No.1"},
+        {name:"麺屋はるか 秋葉原本店", url:"https://www.google.com/maps/search/麺屋はるか+秋葉原", price:"~¥1,000", tag:"台灣まぜそば"},
+        {name:"丸五（とんかつ）", url:"https://www.google.com/maps/search/とんかつ丸五+秋葉原", price:"~¥2,000", tag:"傳說級"},
+        {name:"青島食堂 秋葉原店", url:"https://www.google.com/maps/search/青島食堂+秋葉原", price:"~¥1,000", tag:"清爽系"},
+        {name:"Milk Shop Luck 酪", url:"https://www.google.com/maps/search/ミルクショップラック+秋葉原", price:"~¥500", tag:"JR月台內"}
+      ],
+      transport:"🚃 大塚 → 山手線 10分 → 秋葉原\n🚃 秋葉原 → 京浜東北線 2分 → 東京駅"
+    },
+    {
+      day:4, date:"7/16", week:"㊍", title:"中野＋新宿", icon:"🛍️",
+      slots:[
+        {type:"main", label:"🛍️ 上午", items:["中野百老匯（動漫・二手・雜貨）"]},
+        {type:"main", label:"🌆 下午", items:["新宿加碼","無印良品 新宿靖國通店（旗艦店）"]},
+        {type:"evening", label:"🌙 19:30~21:30", items:["東京都廳展望台 寶可夢灯光秀（無料）","都廳45F南展望室 プロジェクションマッピング"]}
+      ],
+      foods:[
+        {name:"新宿思い出橫丁", url:"https://www.google.com/maps/search/新宿思い出横丁", price:"一串~¥300", tag:"昭和氛圍"},
+        {name:"東京麺通団 讃岐うどん", url:"https://www.google.com/maps/search/東京麺通団+新宿", price:"~¥500", tag:"自助式"}
+      ],
+      transport:"🚃 大塚 → 山手線 9分 → 新宿 → 中央線 5分 → 中野\n🚃 中野 → 中央線 5分 → 新宿"
+    },
+    {
+      day:5, date:"7/17", week:"㊎", title:"搬家＋巢鴨", icon:"🏠",
+      slots:[
+        {type:"main", label:"🏠 上午", items:["搬家：大塚→巢鴨"]},
+        {type:"main", label:"🛤️ 下午", items:["巢鴨地藏通商店街：高岩寺、鹽大福、鴨&蔥拉麵、炸豬排、福壽庵、大橋屋、都電咖啡店"]}
+      ],
+      foods:[
+        {name:"みずの 鹽大福", url:"https://www.google.com/maps/search/みずの+巣鴨", price:"~¥150", tag:"元祖"},
+        {name:"磯揚げまる天 たこ棒", url:"https://www.google.com/maps/search/磯揚げまる天+巣鴨", price:"~¥300", tag:"現炸"},
+        {name:"神樂坂五十番 巣鴨店", url:"https://www.google.com/maps/search/神楽坂五十番+巣鴨", price:"~¥400", tag:"肉まん"},
+        {name:"鶴すし", url:"https://www.google.com/maps/search/鶴すし+巣鴨", price:"~¥3,000", tag:"70年老舖"}
+      ],
+      transport:"🚃 大塚 → 山手線 1站 → 巢鴨"
+    },
+    {
+      day:6, date:"7/18", week:"㊏", title:"跳蚤市場🔥＋台場", icon:"🛒",
+      slots:[
+        {type:"main", label:"🌅 一早", items:["大井競馬場跳蚤市場"]},
+        {type:"main", label:"🌆 下午", items:["加碼台場"]}
+      ],
+      foods:[],
+      transport:"🚃 巢鴨 → 山手線 → 大井町 → 京急 → 大井競馬場前\n🚃 回程：東京モノレール 天王洲アイル → りんかい線 → 台場（省20分）"
+    },
+    {
+      day:7, date:"7/19", week:"㊐", title:"築地→銀座→淺草", icon:"🗼",
+      slots:[
+        {type:"main", label:"🌅 早餐", items:["築地市場（海鮮丼・玉子燒・寿司）"]},
+        {type:"main", label:"🏙️ 10:00~ 銀座", items:[
+          "銀座中央通り散策",
+          "新光三越／伊東屋（文具）／BONGEN COFFEE",
+          "AMERICAN（精選服飾）／Ginza Sony Park",
+          "木村家本店（あんぱん）"
+        ]},
+        {type:"main", label:"🏮 下午 淺草", items:["雷門・仲見世通・淺草寺"]},
+        {type:"evening", label:"🌙 傍晚 淺草", items:[
+          "淺草地下商店街（晚餐）",
+          "神谷バー 電気ブラン（日本最古の酒吧・明治13年）",
+          "しまむら浅草ROX・3G店（子供服・日用品）"
+        ]}
+      ],
+      foods:[
+        {name:"長生庵 お刺身朝定食", url:"https://www.google.com/maps/search/長生庵+築地", price:"¥2,000", tag:"9種刺身"},
+        {name:"つきじかんの 目ざまし丼", url:"https://www.google.com/maps/search/つきじ+かんの+築地", price:"¥1,000", tag:"10時前限定"},
+        {name:"すしざんまい本店 まぐろ丼", url:"https://www.google.com/maps/search/すしざんまい+本店+築地", price:"¥748", tag:"24時間"},
+        {name:"淺草メンチ", url:"https://www.google.com/maps/search/浅草メンチ", price:"~¥350", tag:"肉汁炸彈"},
+        {name:"花月堂 ジャンボめろんぱん", url:"https://www.google.com/maps/search/花月堂+浅草", price:"~¥300", tag:"現金のみ"},
+        {name:"壽々喜園 抹茶ジェラート", url:"https://www.google.com/maps/search/壽々喜園+浅草", price:"~¥600", tag:"17時閉"},
+        {name:"淺草きびだんご あづま", url:"https://www.google.com/maps/search/浅草きびだんご+あづま", price:"~¥300", tag:"定番"},
+        {name:"神谷バー 電気ブラン", url:"https://www.google.com/maps/search/神谷バー+浅草", price:"¥600~", tag:"明治13年"}
+      ],
+      transport:"🚃 巢鴨 → 山手線 10分 → 秋葉原 → 日比谷線 4分 → 築地\n🚶 築地→徒歩10分→銀座 → 🚃銀座線 15分→淺草\n🚃 淺草 → 銀座線 5分 → 上野 → 山手線 8分 → 巢鴨"
+    },
+    {
+      day:8, date:"7/20", week:"㊊", title:"澀谷＋原宿🎌", icon:"🌆",
+      slots:[
+        {type:"main", label:"🎮 10:00~ 渋谷PARCO", items:[
+          "Nintendo TOKYO（整理券対策・早めに）",
+          "Pokémon Center Shibuya",
+          "SEGA 渋谷"
+        ]},
+        {type:"main", label:"🎵 中午 タワーレコード渋谷", items:[
+          "2F TOWER SPACE（無料展示）",
+          "6F TOWER VINYL＋ビール"
+        ]},
+        {type:"main", label:"🏙️ 下午 渋谷", items:[
+          "渋谷スクランブルスクエア→SHIBUYA SKY（展望）",
+          "ヒカリエ ShinQs（百貨地下美食）"
+        ]},
+        {type:"main", label:"🌸 傍晚 表参道→原宿", items:[
+          "表参道：文房具カフェ／キデイランド オモカド",
+          "神宮前公衆トイレ（NIGOデザイン・原宿駅2分）",
+          "神宮通公園トイレ（安藤忠雄・原宿駅5分）",
+          "竹下通り（可麗餅・雜貨）"
+        ]}
+      ],
+      foods:[
+        {name:"タワーレコード6F Beer", url:"https://www.google.com/maps/search/タワーレコード+渋谷", price:"~¥700", tag:"休憩"},
+        {name:"渋谷 沾麵", url:"https://www.google.com/maps/search/渋谷+つけ麺", price:"~¥1,000", tag:"午餐推奨"},
+        {name:"MARION CREPES 原宿", url:"https://www.google.com/maps/search/MARION+CREPES+原宿", price:"~¥600", tag:"竹下通り"},
+        {name:"LUKE'S LOBSTER 表参道", url:"https://www.google.com/maps/search/LUKE'S+LOBSTER+表参道", price:"~¥1,200", tag:"龍蝦堡"}
+      ],
+      transport:"🚃 巢鴨 → 山手線 直通 15分 → 澀谷\n🚶 澀谷→徒歩15分→表参道→徒歩10分→原宿\n🚃 原宿 → 山手線 7分 → 巢鴨"
+    },
+    {
+      day:9, date:"7/21", week:"㊋", title:"東京巨蛋🔥 巨人vs鯉魚", icon:"⚾",
+      slots:[
+        {type:"main", label:"🎡 上午", items:["後樂園／LaQua（巨蛋旁）"]},
+        {type:"main", label:"⏰ 16:00", items:["開放入場"]},
+        {type:"evening", label:"⚾ 18:00", items:["試合開始！巨人 vs 鯉魚"]}
+      ],
+      foods:[
+        {name:"LaQua美食區", url:"https://www.google.com/maps/search/ラクーア+東京ドーム", price:"~¥1,500", tag:"上午"},
+        {name:"球場グルメ", url:"https://www.google.com/maps/search/東京ドーム+グルメ", price:"~¥1,000", tag:"球賽"},
+        {name:"水道橋駅前居酒屋", url:"https://www.google.com/maps/search/水道橋+居酒屋", price:"~¥3,000", tag:"賽後"}
+      ],
+      transport:"🚃 巢鴨 → 三田線 直通 6分 → 水道橋"
+    },
+    {
+      day:10, date:"7/22", week:"㊋", title:"OUTLET 四選", icon:"🛍️",
+      slots:[
+        {type:"flex", label:"🏆 おすすめ 南町田", items:[
+          "🚃 巢鴨→山手線15分→渋谷→東急田園都市線35分→南町田",
+          "¥350片道・駅直結・免預約・親子友善・室内outlet"
+        ]},
+        {type:"flex", label:"☀️ 避暑 輕井沢", items:[
+          "🚄 巢鴨→山手線8分→東京→北陸新幹線あさま1hr10分→輕井沢駅北口直結",
+          "¥6,020片道・標高1000m・約25°C"
+        ]},
+        {type:"flex", label:"🚌 御殿場 Premium Outlets", items:[
+          "巢鴨→山手線9分→新宿→🚌高速巴士1hr40分→御殿場",
+          "往復¥4,400・需預約・品牌最多・富士山景"
+        ]},
+        {type:"flex", label:"🚌 木更津", items:[
+          "巢鴨→山手線8分→東京→🚌高速巴士50分→木更津",
+          "往復¥2,800・最近・有屋頂"
+        ]}
+      ],
+      foods:[
+        {name:"南町田 Grand Kitchen", url:"https://www.google.com/maps/search/グランドキッチン+南町田", price:"~¥1,500", tag:"outlet内"},
+        {name:"輕井沢 村民食堂", url:"https://www.google.com/maps/search/村民食堂+軽井沢", price:"~¥1,500", tag:"和食"},
+        {name:"御殿場 美食廣場", url:"https://www.google.com/maps/search/御殿場プレミアムアウトレット", price:"~¥1,500", tag:"outlet内"}
+      ],
+      transport:"依天氣決定：\n☀️30°C↑→軽井沢(避暑25°C)\n☁️普通→南町田🏆駅直結\n🌧雨→南町田or木更津(有屋頂)\n🌤好天→御殿場(富士山)"
+    },
+    {
+      day:11, date:"7/23", week:"㊍", title:"高圓寺＋下北澤", icon:"🎸",
+      slots:[
+        {type:"main", label:"🎸 上午 高圓寺", items:[
+          "南口→パル商店街→エトアール通り→ルック商店街",
+          "古著・雜貨巡禮"
+        ]},
+        {type:"main", label:"🍜 中午", items:["新宿（自然轉乘點・午餐）"]},
+        {type:"main", label:"🎭 下午 下北澤", items:[
+          "南西口→茶澤通り→北沢3丁目→東口",
+          "BoobyTRAP（古著¥700↓）",
+          "STICK OUT（古著¥800均一）",
+          "ハードオフ（二手3C・玩具）",
+          "東口商店街"
+        ]}
+      ],
+      foods:[
+        {name:"一龍（敦賀ラーメン）", url:"https://www.google.com/maps/search/一龍+下北沢", price:"~¥950", tag:"創業42年"},
+        {name:"ホルモン稲田屋", url:"https://www.google.com/maps/search/ホルモン稲田屋+下北沢", price:"~¥2,500", tag:"炭火"},
+        {name:"mixture（パン）", url:"https://www.google.com/maps/search/mixture+下北沢", price:"~¥170", tag:"70種麵包"}
+      ],
+      transport:"🚃 巢鴨 → 山手線 11分 → 高圓寺\n🚃 高圓寺 → 中央線 5分 → 新宿 → 小田急線 5分 → 下北澤\n🚃 下北澤 → 小田急線 5分 → 新宿 → 山手線 9分 → 巢鴨"
+    },
+    {
+      day:12, date:"7/24", week:"㊎", title:"回程", icon:"✈️",
+      slots:[
+        {type:"main", label:"🌅 上午", items:["巢鴨市集（最後逛）"]},
+        {type:"main", label:"🛍️ 下午", items:["上野／阿美橫町最後採買"]},
+        {type:"main", label:"⏰ ~17:00", items:["京成上野 → 🚄Skyliner → 成田"]},
+        {type:"evening", label:"✈️ 21:15", items:["酷航 TR875 起飛"]}
+      ],
+      foods:[
+        {name:"肉の大山 やみつきメンチ", url:"https://www.google.com/maps/search/肉の大山+上野", price:"¥165", tag:"最便宜"},
+        {name:"うさぎや どらやき", url:"https://www.google.com/maps/search/うさぎや+上野", price:"~¥300", tag:"大正2年"},
+        {name:"平成福順 焼き小籠包", url:"https://www.google.com/maps/search/平成福順+上野", price:"¥400/4個", tag:"人氣"},
+        {name:"君野園 抹茶ソフト", url:"https://www.google.com/maps/search/君野園+上野", price:"¥400", tag:"明治32年"},
+        {name:"ドンレミーアウトレット", url:"https://www.google.com/maps/search/ドンレミーアウトレット+上野駅前", price:"¥90起", tag:"帶回台灣"}
+      ],
+      transport:"🚃 巢鴨 → 山手線 8分 → 上野 → 🚄Skyliner 40分 → 成田"
+    }
+  ],
+  routes:[
+    {from:"巢鴨", to:"池袋", line:"山手線", time:"3分"},
+    {from:"巢鴨", to:"秋葉原", line:"山手線", time:"10分"},
+    {from:"巢鴨", to:"澀谷", line:"山手線", time:"15分"},
+    {from:"巢鴨", to:"新宿", line:"山手線", time:"9分"},
+    {from:"巢鴨", to:"巨蛋(水道橋)", line:"三田線 直通", time:"6分"},
+    {from:"巢鴨", to:"銀座", line:"三田線 直通", time:"14分"},
+    {from:"巢鴨", to:"上野", line:"山手線", time:"8分"},
+    {from:"巢鴨", to:"築地", line:"山手線→日比谷線", time:"25分"},
+    {from:"巢鴨", to:"成田", line:"山手線→日暮里→Skyliner", time:"55分"},
+    {from:"巢鴨", to:"中野", line:"山手線→中央線", time:"16分"},
+    {from:"巢鴨", to:"淺草", line:"山手線→銀座線", time:"25分"},
+    {from:"巢鴨", to:"原宿", line:"山手線", time:"13分"},
+    {from:"巢鴨", to:"高圓寺", line:"山手線", time:"11分"},
+    {from:"巢鴨", to:"下北澤", line:"山手線→小田急線", time:"20分"},
+    {from:"巢鴨", to:"南町田", line:"山手線→田園都市線", time:"35分"},
+    {from:"大塚", to:"池袋", line:"山手線", time:"3分"},
+    {from:"大塚", to:"秋葉原", line:"山手線", time:"8分"}
+  ]
+};
 
-const days = [
-  {d:1, date:"7/13", wk:"㊊", title:"抵達日", icon:"✈️",
-    route:"成田→大塚",
-    slot:[
-      {l:"🌅 上午", t:"成田空港 → 🚄Skyliner → 日暮里 → 🚃山手線 → 大塚"},
-      {l:"🌆 傍晚", t:"池袋（輕逛＋晚餐）"},
-      {l:"🌙 晚上", t:"早點休息（紅眼班機）", c:"evening"}
-    ],
-    food:[
-      {n:"無敵家拉麵",u:"https://www.google.com/maps/search/無敵家+池袋",p:"~¥1,000",t:"必吃"},
-      {n:"魚金 池袋東口店",u:"https://www.google.com/maps/search/魚金+池袋",p:"~¥3,000",t:"海鮮"},
-      {n:"開樂 巨大煎餃",u:"https://www.google.com/maps/search/開樂+池袋",p:"¥333/3個",t:"週一定休"}
-    ],
-    tr:[
-      {st:"成田空港",line:"🚄 Skyliner 40分"},
-      {st:"日暮里",line:"🚃 山手線 5分"},
-      {st:"大塚",line:"🏨 Check-in",last:true}
-    ]},
-  {d:2, date:"7/14", wk:"㊋", title:"池袋＋御靈祭🔥", icon:"🎮",
-    route:"池袋→九段下",
-    slot:[
-      {l:"🎮 整天", t:"池袋：Sunshine City、Animate、Pokémon Center"},
-      {l:"🌙 晚上", t:"🏮 御靈祭 Mitama Matsuri @靖國神社 ✨ 青森ねぶた＋阿波踊り＋30,000燈籠", c:"evening"}
-    ],
-    food:[
-      {n:"竈門ご飯 一穀",u:"https://www.google.com/maps/search/竈門ご飯+一穀+池袋+サンシャインシティ",p:"~¥1,500",t:"2026新開"},
-      {n:"開樂 巨大煎餃",u:"https://www.google.com/maps/search/開樂+池袋",p:"¥333/3個",t:"週一定休"},
-      {n:"靖國神社屋台",u:"https://www.google.com/maps/search/靖國神社",p:"~¥500",t:"祭典"}
-    ],
-    tr:[
-      {st:"大塚",line:"🚃 山手線 3分"},
-      {st:"池袋",line:"🎮 Sunshine City / Animate"},
-      {st:"池袋",line:"🚃 有樂町線 10分"},
-      {st:"九段下",line:"🏮 御靈祭 @靖國神社",last:true}
-    ]},
-  {d:3, date:"7/15", wk:"㊋", title:"秋葉原＋東京一番街", icon:"🤖",
-    route:"大塚→秋葉原",
-    slot:[
-      {l:"🤖 上午", t:"秋葉原：神田神社、神秘販賣機、鯉魚王鯛魚燒"},
-      {l:"🏙️ 下午", t:"東京一番街（東京車站地下）"}
-    ],
-    food:[
-      {n:"九州じゃんがら 秋葉原本店",u:"https://www.google.com/maps/search/九州じゃんがら+秋葉原",p:"~¥1,000",t:"人氣No.1"},
-      {n:"麺屋はるか 秋葉原本店",u:"https://www.google.com/maps/search/麺屋はるか+秋葉原",p:"~¥1,000",t:"台灣まぜそば"},
-      {n:"丸五（とんかつ）",u:"https://www.google.com/maps/search/とんかつ丸五+秋葉原",p:"~¥2,000",t:"傳說級"},
-      {n:"青島食堂 秋葉原店",u:"https://www.google.com/maps/search/青島食堂+秋葉原",p:"~¥1,000",t:"清爽系"}
-    ],
-    tr:[
-      {st:"大塚",line:"🚃 山手線 10分"},
-      {st:"秋葉原",line:"🤖 電器街 + 神田神社"},
-      {st:"（徒步15分）",line:""},
-      {st:"東京車站",line:"🏙️ 一番街",last:true}
-    ]},
-  {d:4, date:"7/16", wk:"㊍", title:"中野＋新宿", icon:"🛍️",
-    route:"大塚→中野→新宿",
-    slot:[
-      {l:"🛍️ 上午", t:"中野百老匯"},
-      {l:"🌆 下午", t:"新宿加碼"}
-    ],
-    food:[
-      {n:"新宿思い出橫丁",u:"https://www.google.com/maps/search/新宿思い出横丁",p:"一串~¥300",t:"昭和氛圍"}
-    ],
-    tr:[
-      {st:"大塚",line:"🚃 山手線 7分"},
-      {st:"新宿",line:"🚃 中央線 3分"},
-      {st:"中野",line:"🛍️ 中野百老匯"},
-      {st:"（中央線返回）",line:""},
-      {st:"新宿",line:"🌆 加碼逛街",last:true}
-    ]},
-  {d:5, date:"7/17", wk:"㊎", title:"搬家＋巢鴨", icon:"🏠",
-    route:"大塚→巢鴨",
-    slot:[
-      {l:"🏠 上午", t:"搬家：大塚→巢鴨"},
-      {l:"🛤️ 下午", t:"巢鴨地藏通商店街：鹽大福、高岩寺、鴨&蔥拉麵、福壽庵、都電咖啡店"}
-    ],
-    food:[
-      {n:"みずの 鹽大福",u:"https://www.google.com/maps/search/みずの+巣鴨",p:"~¥150",t:"元祖"},
-      {n:"磯揚げまる天 たこ棒",u:"https://www.google.com/maps/search/磯揚げまる天+巣鴨",p:"~¥300",t:"現炸"},
-      {n:"神樂坂五十番 巣鴨店",u:"https://www.google.com/maps/search/神楽坂五十番+巣鴨",p:"~¥400",t:"肉まん"},
-      {n:"鶴すし",u:"https://www.google.com/maps/search/鶴すし+巣鴨",p:"~¥3,000",t:"70年老舖"}
-    ],
-    tr:[
-      {st:"大塚",line:"🚃 山手線 1站"},
-      {st:"巢鴨",line:"🏠 新基地！",last:true}
-    ]},
-  {d:6, date:"7/18", wk:"㊏", title:"跳蚤市場🔥＋台場", icon:"🛒",
-    route:"巢鴨→大井競馬場→台場",
-    slot:[
-      {l:"🌅 一早", t:"大井競馬場跳蚤市場"},
-      {l:"🌆 下午", t:"加碼台場"}
-    ],
-    food:[],
-    tr:[
-      {st:"巢鴨",line:"🚃 山手線"},
-      {st:"大井町",line:"🚃 京急"},
-      {st:"大井競馬場",line:"🛒 跳蚤市場"},
-      {st:"（回程）",line:"🚝 東京モノレール → 天王洲アイル"},
-      {st:"台場",line:"🌆 下午加碼",last:true}
-    ]},
-  {d:7, date:"7/19", wk:"㊐", title:"澀谷＋原宿", icon:"🌆",
-    route:"巢鴨→澀谷",
-    slot:[
-      {l:"🌆 整天", t:"澀谷 → 徒步 → 原宿（青春路線）"}
-    ],
-    food:[],
-    tr:[
-      {st:"巢鴨",line:"🚃 山手線 直通 15分"},
-      {st:"澀谷",line:"🌆 澀谷→徒步→原宿",last:true}
-    ]},
-  {d:8, date:"7/20", wk:"㊊", title:"高圓寺＋下北澤", icon:"🎸",
-    route:"巢鴨→高圓寺→下北澤",
-    slot:[
-      {l:"🎸 上午", t:"高圓寺（古著雜貨）"},
-      {l:"🍜 中午", t:"新宿午餐"},
-      {l:"🎭 下午", t:"下北澤"}
-    ],
-    food:[
-      {n:"一龍（敦賀ラーメン）",u:"https://www.google.com/maps/search/一龍+下北沢",p:"~¥950",t:"創業42年"},
-      {n:"ホルモン稲田屋",u:"https://www.google.com/maps/search/ホルモン稲田屋+下北沢",p:"~¥2,500",t:"炭火"},
-      {n:"mixture（パン）",u:"https://www.google.com/maps/search/mixture+下北沢",p:"~¥170",t:"70種麵包"}
-    ],
-    tr:[
-      {st:"巢鴨",line:"🚃 山手線"},
-      {st:"高圓寺",line:"🎸 上午"},
-      {st:"中央線 → 新宿",line:"🍜 午餐"},
-      {st:"小田急線",line:""},
-      {st:"下北澤",line:"🎭 下午",last:true}
-    ]},
-  {d:9, date:"7/21", wk:"㊋", title:"東京巨蛋🔥 巨人vs鯉魚", icon:"⚾",
-    route:"巢鴨→水道橋",
-    slot:[
-      {l:"🎡 上午", t:"後樂園／LaQua（巨蛋旁）"},
-      {l:"⏰ 16:00", t:"開放入場"},
-      {l:"⚾ 18:00", t:"試合開始！巨人 vs 鯉魚", c:"evening"}
-    ],
-    food:[
-      {n:"LaQua美食區",u:"https://www.google.com/maps/search/ラクーア+東京ドーム",p:"~¥1,500",t:"上午"},
-      {n:"球場グルメ",u:"https://www.google.com/maps/search/東京ドーム+グルメ",p:"~¥1,000",t:"球賽"},
-      {n:"水道橋駅前居酒屋",u:"https://www.google.com/maps/search/水道橋+居酒屋",p:"~¥3,000",t:"賽後"}
-    ],
-    tr:[
-      {st:"巢鴨",line:"🚃 三田線 直通 6分"},
-      {st:"水道橋",line:"⚾ 東京巨蛋！",last:true}
-    ]},
-  {d:10, date:"7/22", wk:"㊋", title:"御殿場 Outlet🔥", icon:"🛍️",
-    route:"巢鴨→新宿→御殿場",
-    slot:[
-      {l:"🛍️ 整天", t:"御殿場 Premium Outlets"}
-    ],
-    food:[
-      {n:"Outlet 美食廣場",u:"https://www.google.com/maps/search/御殿場プレミアムアウトレット",p:"~¥1,500",t:"outlet內"}
-    ],
-    tr:[
-      {st:"巢鴨",line:"🚃 山手線"},
-      {st:"新宿",line:"🚌 高速巴士 1.5hr"},
-      {st:"御殿場 Outlet",line:"🛍️ 整天",last:true}
-    ]},
-  {d:11, date:"7/23", wk:"㊍", title:"築地→銀座→淺草→晴空塔✨", icon:"🗼",
-    route:"巢鴨→築地→銀座→淺草→晴空塔",
-    slot:[
-      {l:"🌅 早餐", t:"築地市場（海鮮丼、玉子燒）"},
-      {l:"🏙️ 上午", t:"銀座、Ginza Sony Park、木村家本店"},
-      {l:"🏮 下午", t:"淺草（雷門、仲見世通、淺草寺）"},
-      {l:"🗼 傍晚", t:"晴空塔（夜景）", c:"evening"}
-    ],
-    food:[
-      {n:"長生庵 お刺身朝定食",u:"https://www.google.com/maps/search/長生庵+築地",p:"¥2,000",t:"9種刺身"},
-      {n:"つきじかんの 目ざまし丼",u:"https://www.google.com/maps/search/つきじ+かんの+築地",p:"¥1,000",t:"10時前限定"},
-      {n:"すしざんまい本店 まぐろ丼",u:"https://www.google.com/maps/search/すしざんまい+本店+築地",p:"¥748",t:"24時間"},
-      {n:"淺草メンチ",u:"https://www.google.com/maps/search/浅草メンチ",p:"~¥350",t:"肉汁炸彈"},
-      {n:"花月堂 ジャンボめろんぱん",u:"https://www.google.com/maps/search/花月堂+浅草",p:"~¥300",t:"現金のみ"},
-      {n:"壽々喜園 抹茶ジェラート",u:"https://www.google.com/maps/search/壽々喜園+浅草",p:"~¥600",t:"17:0閉"},
-      {n:"淺草きびだんご あづま",u:"https://www.google.com/maps/search/浅草きびだんご+あづま",p:"~¥300",t:"定番"}
-    ],
-    tr:[
-      {st:"巢鴨",line:"🚃 山手線 → 日比谷線"},
-      {st:"築地市場",line:"🌅 早餐"},
-      {st:"（徒步10分）",line:""},
-      {st:"銀座",line:"🏙️ Sony Park"},
-      {st:"（銀座線 15分）",line:""},
-      {st:"淺草",line:"🏮 雷門・仲見世"},
-      {st:"（徒步15分）",line:""},
-      {st:"晴空塔",line:"🗼 夜景",last:true}
-    ]},
-  {d:12, date:"7/24", wk:"㊎", title:"回程", icon:"✈️",
-    route:"巢鴨→上野→成田",
-    slot:[
-      {l:"🌅 上午", t:"巢鴨市集（最後逛）"},
-      {l:"🛍️ 下午", t:"上野／阿美橫町最後採買"},
-      {l:"⏰ ~17:00", t:"京成上野 → 🚄Skyliner → 成田"},
-      {l:"✈️ 21:15", t:"酷航 TR875 起飛", c:"evening"}
-    ],
-    food:[
-      {n:"肉の大山 やみつきメンチ",u:"https://www.google.com/maps/search/肉の大山+上野",p:"¥165",t:"最便宜"},
-      {n:"うさぎや どらやき",u:"https://www.google.com/maps/search/うさぎや+上野",p:"~¥300",t:"大正2年"},
-      {n:"平成福順 焼き小籠包",u:"https://www.google.com/maps/search/平成福順+上野",p:"¥400/4個",t:"人氣"},
-      {n:"君野園 抹茶ソフト",u:"https://www.google.com/maps/search/君野園+上野",p:"¥400",t:"明治32年"},
-      {n:"ドンレミーアウトレット",u:"https://www.google.com/maps/search/ドンレミーアウトレット+上野駅前",p:"¥90起",t:"帶回台灣"}
-    ],
-    tr:[
-      {st:"巢鴨",line:"🌅 上午市集"},
-      {st:"（山手線 8分）",line:""},
-      {st:"上野",line:"🛍️ 阿美橫町最後採買"},
-      {st:"京成上野",line:"🚄 Skyliner 40分"},
-      {st:"成田空港",line:"✈️ TR875 21:15",last:true}
-    ]}
-];
-
-function renderDays(){
+function renderItinerary(){
   const c=document.getElementById('daysContainer');
-  days.forEach((d,i)=>{
-    let routeText=d.tr.map(r=>r.line||r.st).filter(Boolean).join(' → ');
+  c.innerHTML='';
+  data.days.forEach((d,i)=>{
     const card=document.createElement('div');
     card.className='day-card';
     card.innerHTML=`
       <div class="day-header" onclick="toggleDay(${i})">
-        <div class="day-num">D${d.d}</div>
+        <div class="day-num">D${d.day}</div>
         <div class="day-meta">
-          <h2>Day ${d.d}｜${d.date} ${d.wk}</h2>
+          <h2>Day ${d.day}｜${d.date} ${d.week}</h2>
           <div class="sub">${d.icon} ${d.title}</div>
         </div>
-        <div class="route-badge">
-          <span class="line">${d.route.split('→')[0]}</span>
-          <span class="time">→ ${d.route.split('→').pop()}</span>
-        </div>
-        <span class="arrow" id="a${i}">▾</span>
+        <span class="arrow" id="arrow${i}">▾</span>
       </div>
-      <div class="day-body" id="b${i}">
-        ${d.slot.map(s=>`
-          <div class="slot${s.c?' '+s.c:''}">
-            <h3>${s.l}</h3>
-            <p>${s.t}</p>
+      <div class="day-body" id="body${i}">
+        ${d.slots.map(s=>`
+          <div class="slot ${s.type==='evening'?'evening':s.type==='flex'?'flex':'main'}">
+            <h3>${s.label}</h3>
+            ${s.items.map(t=>`<p>${t}</p>`).join('')}
           </div>
         `).join('')}
-        ${d.food.length?`
-          <div style="margin:8px 0;font-size:12px;font-weight:600;color:var(--success)">🍜 順路美食</div>
+        ${d.foods.length?`
+          <div style="margin:8px 0;font-size:13px;font-weight:600;color:var(--success)">🍜 順路美食</div>
           <div class="food-grid">
-            ${d.food.map(f=>`
+            ${d.foods.map(f=>`
               <div class="food-item">
-                <a href="${f.u}" target="_blank">${f.n}</a>
-                <span class="price">${f.p}</span>
-                <span class="tag">${f.t}</span>
+                <a href="${f.url}" target="_blank">${f.name}</a>
+                <span class="price">${f.price}</span>
+                <span class="tag">${f.tag}</span>
               </div>
             `).join('')}
           </div>
         `:''}
-        <div class="day-transport">
-          <div class="title">🚃 交通路線</div>
-          ${d.tr.map((r,j)=>{
-            if(!r.line&&!r.st) return '';
-            const isLast=r.last||j===d.tr.length-1;
-            const isEmpty=!r.line;
-            return isEmpty
-              ? `<div style="text-align:center;font-size:11px;color:var(--text2);padding:1px 0">${r.st}</div>`
-              : `<div class="trans-row">
-                  <span class="dot${isLast?' end':''}"></span>
-                  <span class="station">${r.st}</span>
-                  <span class="info">${r.line}</span>
-                </div>`;
-          }).join('')}
+        <div class="transport">
+          <span class="icon">🚃</span> ${d.transport.replace(/\n/g,'<br>')}
         </div>
       </div>
     `;
@@ -426,32 +400,33 @@ function renderDays(){
 }
 
 function toggleDay(i){
-  const b=document.getElementById('b'+i);
-  const a=document.getElementById('a'+i);
-  b.classList.toggle('open');
-  a.classList.toggle('open');
+  const body=document.getElementById('body'+i);
+  const arrow=document.getElementById('arrow'+i);
+  body.classList.toggle('open');
+  arrow.classList.toggle('open');
 }
 
 function renderFood(){
   const c=document.getElementById('foodContainer');
-  days.forEach(d=>{
-    if(!d.food.length) return;
+  c.innerHTML='';
+  data.days.forEach(d=>{
+    if(!d.foods.length) return;
     const card=document.createElement('div');
     card.className='day-card';
-    card.style.borderLeft='4px solid var(--primary)';
+    card.style.borderLeft=`4px solid var(--primary)`;
     card.innerHTML=`
       <div class="day-header" style="cursor:default">
         <div class="day-meta">
-          <h2>Day ${d.d}｜${d.date} ${d.wk} ${d.icon} ${d.title}</h2>
+          <h2>Day ${d.day}｜${d.date} ${d.week} ${d.icon} ${d.title}</h2>
         </div>
       </div>
-      <div style="padding:0 14px 14px">
+      <div style="padding:0 16px 16px">
         <div class="food-grid">
-          ${d.food.map(f=>`
+          ${d.foods.map(f=>`
             <div class="food-item">
-              <a href="${f.u}" target="_blank">${f.n}</a>
-              <span class="price">${f.p}</span>
-              <span class="tag">${f.t}</span>
+              <a href="${f.url}" target="_blank">${f.name}</a>
+              <span class="price">${f.price}</span>
+              <span class="tag">${f.tag}</span>
             </div>
           `).join('')}
         </div>
@@ -459,88 +434,40 @@ function renderFood(){
     `;
     c.appendChild(card);
   });
-  if(!c.children.length) c.innerHTML='<p style="text-align:center;color:var(--text2);padding:40px;font-size:14px">🍜 美食資料整理中～</p>';
+  if(!c.children.length) c.innerHTML='<p style="text-align:center;color:var(--text2);padding:40px">🍜 尚無美食推薦～</p>';
 }
 
 function renderTransport(){
   const c=document.getElementById('transportContainer');
   c.innerHTML=`
-    <div class="transport-tab-header">
-      <div class="base-selector">
-        <div class="base-btn active" id="baseSugamo" onclick="setBase('sugamo')">📍 巢鴨基地</div>
-        <div class="base-btn" id="baseOtsuka" onclick="setBase('otsuka')">📍 大塚基地</div>
+    <div class="day-card" style="padding:16px;margin-bottom:16px;border-left:4px solid var(--success)">
+      <h2 style="font-size:16px;margin-bottom:8px">📍 巢鴨基地（Day 5-12）</h2>
+    </div>
+    ${data.routes.map(r=>`
+      <div class="transport-card">
+        <h3>🚃 ${r.from} → ${r.to}</h3>
+        <div class="row"><span>路線</span><strong>${r.line}</strong></div>
+        <div class="row"><span>時間</span><strong>${r.time}</strong></div>
       </div>
-      <div style="font-size:11px;color:var(--text2);margin-bottom:8px">👆 選擇你現在的住宿基地</div>
-      <div id="baseRoutes"></div>
+    `).join('')}
+    <div class="day-card" style="padding:16px;margin-top:16px;border-left:4px solid var(--warning)">
+      <h3 style="font-size:14px;margin-bottom:6px">✈️ 成田交通</h3>
+      <div style="font-size:13px;color:var(--text2)">
+        <p><strong>去程：</strong>Skyliner → 日暮里 → 山手線 → 大塚</p>
+        <p><strong>回程：</strong>巢鴨 → 山手線 → 上野 → Skyliner → 成田</p>
+      </div>
     </div>
-  `;
-  renderBaseRoutes('sugamo');
-}
-
-function setBase(b){
-  document.querySelectorAll('.base-btn').forEach(e=>e.classList.remove('active'));
-  document.getElementById(b==='sugamo'?'baseSugamo':'baseOtsuka').classList.add('active');
-  renderBaseRoutes(b);
-}
-
-function renderBaseRoutes(b){
-  const routes=b==='sugamo'?baseNerima:baseOtsuka;
-  const label=b==='sugamo'?'巢鴨':'大塚';
-  const c=document.getElementById('baseRoutes');
-  c.innerHTML=`
-    <div class="route-grid">
-      ${routes.map(r=>`
-        <div class="route-card">
-          <div class="dest">
-            ${r.to.split('(')[0]}
-            ${r.to.includes('(')?`<small>${r.to.match(/\((.+)\)/)?.[1]||''}</small>`:''}
-          </div>
-          <div class="line-info">${r.line}</div>
-          <div class="time-big">${r.time} <small>到著</small></div>
-          <div style="margin-top:6px">
-            <a href="https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(label+'駅')}&destination=${encodeURIComponent(r.to.replace(/[（(][^）)]*[）)]/,'').trim()+(r.to.match(/[（(]([^）)]*)[）)]/)?.[1]?' '+r.to.match(/[（(]([^）)]*)[）)]/)[1]:''))}&travelmode=transit" target="_blank" style="font-size:11px;color:var(--primary);text-decoration:none">🗺️ 路線</a>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-    <div class="long-route-card">
-      <h3>✈️ 成田空港</h3>
-      <div class="step"><span>🚄 去程：</span><span>Skyliner 40分 → 日暮里 → 山手線5分 → 大塚</span></div>
-      <div class="step"><span>🚄 回程：</span><span>巢鴨 → 山手線8分 → 上野 → Skyliner 40分 → 成田（17:00出發）</span></div>
-    </div>
-    <div class="long-route-card">
-      <h3>🚌 長距離移動</h3>
-      <div class="step"><span>🏔️ 御殿場 Outlet：</span><span>巢鴨 → 山手線 → 新宿 → 🚌高速巴士 1.5hr</span></div>
-      <div class="step"><span>🏪 跳蚤市場→台場：</span><span>大井競馬場前 → 東京モノレール → 天王洲アイル → りんかい線 → 東京テレポート</span></div>
+    <div class="day-card" style="padding:16px;margin-top:16px;border-left:4px solid var(--primary)">
+      <h3 style="font-size:14px;margin-bottom:6px">🚌 OUTLET 四選</h3>
+      <div style="font-size:13px;color:var(--text2)">
+        <p><strong>🏆 南町田：</strong>巢鴨→山手線15分→渋谷→東急田園都市線35分→南町田駅直結</p>
+        <p><strong>☀️ 輕井沢：</strong>巢鴨→山手線8分→東京→🚄北陸新幹線あさま1hr10分→輕井沢</p>
+        <p><strong>🚌 御殿場：</strong>巢鴨→山手線9分→新宿→🚌高速巴士1hr40分→御殿場</p>
+        <p><strong>🚌 木更津：</strong>巢鴨→山手線8分→東京→🚌高速巴士50分→木更津</p>
+      </div>
     </div>
   `;
 }
-
-function gmUrl(to,b){
-  let dest=to.replace(/[（(][^）)]*[）)]/,'').trim();
-  let hint=to.match(/[（(]([^）)]*)[）)]/)?.[1];
-  let place=hint?dest+' '+hint:dest;
-  return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent((b||'巢鴨')+'駅')}&destination=${encodeURIComponent(place)}&travelmode=transit`;
-}
-function renderOverlayRoutes(){
-  const c=document.getElementById('overlayRoutes');
-  const all=[...new Set([...baseNerima,...baseOtsuka].map(r=>r.to))];
-  c.innerHTML=`
-    <div style="margin-bottom:10px;font-size:13px;color:var(--text2)">📍 從 <strong style="color:var(--text)">巢鴨</strong> 出發（電車時間） — 點擊卡片打開 Google Maps 查即時班次</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-      ${baseNerima.map(r=>`
-        <a href="${gmUrl(r.to)}" target="_blank" rel="noopener" style="background:var(--surface);border-radius:8px;padding:10px;text-align:center;text-decoration:none;color:inherit;display:block">
-          <div style="font-size:16px;font-weight:700">${r.to.split('(')[0]}</div>
-          <div style="font-size:11px;color:var(--text2)">${r.line}</div>
-          <div style="font-size:18px;font-weight:800;color:var(--success);margin-top:2px">${r.time}</div>
-        </a>
-      `).join('')}
-    </div>
-  `;
-}
-
-function openOverlay(){document.getElementById('overlay').classList.add('open');renderOverlayRoutes();}
-function closeOverlay(){document.getElementById('overlay').classList.remove('open');}
 
 document.querySelectorAll('.tabs button').forEach(btn=>{
   btn.addEventListener('click',function(){
@@ -551,7 +478,7 @@ document.querySelectorAll('.tabs button').forEach(btn=>{
   });
 });
 
-renderDays();
+renderItinerary();
 renderFood();
 renderTransport();
 </script>
